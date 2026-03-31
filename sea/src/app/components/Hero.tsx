@@ -1,32 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export default function Hero() {
   return (
     <section id="home" className="relative w-full h-screen overflow-hidden">
-      {/* Ken Burns background */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ scale: 1 }}
-        animate={{ scale: 1.06 }}
-        transition={{
-          duration: 12,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
+      {/* Video background — Ocean Beach drone footage */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover object-center"
       >
-        <Image
-          src="/images/hero.jpg"
-          alt="Aerial view of San Diego coastline"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-      </motion.div>
+        <source src="/images/hero.mp4" type="video/mp4" />
+      </video>
 
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/55" />
