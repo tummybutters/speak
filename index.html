@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speakeasy Sunday Bristol | Japanese Craft Cocktails | Costa Mesa</title>
+<meta name="description" content="A hidden Japanese speakeasy open only on Sundays. Craft cocktails, live DJ, intimate vibes. DM for location.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E8D5A8;
+  --gold-dim: #8B7240;
+  --bg: #0A0A0A;
+  --bg-card: #111111;
+  --text: #E8E4DC;
+  --text-dim: #8A8378;
+  --red-glow: #4A1A1A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.lang-ja {
+  font-family: 'Noto Serif JP', 'Outfit', serif;
+}
+body.lang-ja .section-label,
+body.lang-ja .hero-details,
+body.lang-ja .stat-label,
+body.lang-ja .info-desc,
+body.lang-ja .footer-sub {
+  letter-spacing: 0.1em;
+}
+
+/* ========== LANGUAGE SELECTOR ========== */
+.lang-overlay {
+  position: fixed; inset: 0; z-index: 99999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.lang-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.lang-inner {
+  text-align: center;
+  animation: fadeUp 1s ease 0.3s both;
+}
+
+.lang-top-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim));
+  margin: 0 auto 2.5rem;
+}
+
+.lang-prompt {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  color: var(--text-dim);
+  margin-bottom: 3rem;
+  letter-spacing: 0.1em;
+}
+
+.lang-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.lang-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 2rem 3rem;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border-radius: 2px;
+  min-width: 180px;
+}
+
+.lang-btn:hover {
+  border-color: var(--gold);
+  background: rgba(201, 169, 110, 0.05);
+}
+
+.lang-btn-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.lang-btn-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--text);
+}
+
+.lang-btn-jp .lang-btn-text {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+}
+
+/* ========== LANG TOGGLE (top right, always visible) ========== */
+.lang-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 9998;
+  display: flex;
+  gap: 0;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: rgba(10,10,10,0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.lang-toggle.visible { opacity: 1; }
+
+.lang-toggle button {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Outfit', sans-serif;
+}
+
+.lang-toggle button.active {
+  color: var(--gold);
+  background: rgba(201, 169, 110, 0.1);
+}
+
+.lang-toggle button:first-child {
+  border-right: 1px solid rgba(201, 169, 110, 0.15);
+}
+
+/* ========== PRELOADER ========== */
+.preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.preloader-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  animation: breathe 2s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('drinks/bar-crowd-2.png') center/cover no-repeat;
+  filter: brightness(0.3) saturate(0.7);
+  transform: scale(1.05);
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.12); }
+}
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 80%, rgba(74, 26, 26, 0.4) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.6) 70%, var(--bg) 100%);
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 0 2rem;
+  animation: fadeUp 1.5s ease 0.5s both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: var(--gold-dim);
+  letter-spacing: 0.5em;
+  margin-bottom: 1.5rem;
+  font-weight: 200;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-bottom: 0.3em;
+}
+
+body.lang-ja .hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  letter-spacing: 0.08em;
+}
+
+.hero-title span {
+  display: block;
+  font-size: 0.35em;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-top: 0.8em;
+  text-transform: uppercase;
+}
+
+body.lang-ja .hero-title span {
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: 0.2em;
+  text-transform: none;
+  font-size: 0.3em;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 2rem auto;
+  opacity: 0.6;
+}
+
+.hero-details {
+  font-weight: 200;
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  color: var(--text-dim);
+  letter-spacing: 0.15em;
+  line-height: 2.2;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: fadeUp 1.5s ease 1.5s both;
+}
+.hero-scroll span {
+  display: block;
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 0 auto;
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ========== SECTIONS ========== */
+section { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem); }
+
+.section-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+body.lang-ja .section-label {
+  font-family: 'Noto Serif JP', serif;
+  text-transform: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+body.lang-ja .section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  line-height: 1.5;
+}
+
+/* ========== ABOUT ========== */
+.about {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.about-images {
+  position: relative;
+  height: 550px;
+}
+
+.about-img-main {
+  position: absolute;
+  top: 0; left: 0;
+  width: 75%;
+  height: 75%;
+  object-fit: cover;
+  border-radius: 2px;
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.about-img-secondary {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 55%;
+  height: 55%;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 3px solid var(--bg);
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.about-text p {
+  font-weight: 200;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+body.lang-ja .about-text p {
+  line-height: 2.2;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+}
+
+.about-text p em {
+  color: var(--gold-light);
+  font-style: normal;
+  font-weight: 300;
+}
+
+.about-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(201, 169, 110, 0.15);
+}
+
+.stat-item { text-align: left; }
+
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-top: 0.4rem;
+  font-weight: 300;
+}
+
+/* ========== ATMOSPHERE ========== */
+.atmosphere {
+  position: relative;
+  padding: 0;
+  height: 60vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.atmosphere-bg {
+  position: absolute; inset: 0;
+  background: url('drinks/bar-crowd-1.png') center/cover no-repeat;
+  filter: brightness(0.35) saturate(0.8);
+}
+
+.atmosphere-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, var(--bg), transparent 30%, transparent 70%, var(--bg));
+}
+
+.atmosphere-content {
+  position: relative; z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.atmosphere-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 700px;
+  color: var(--text);
+}
+
+body.lang-ja .atmosphere-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-style: normal;
+  font-weight: 200;
+  font-size: clamp(1.3rem, 3.5vw, 2.4rem);
+  line-height: 1.8;
+}
+
+.atmosphere-quote span { color: var(--gold); }
+
+/* ========== DRINKS ========== */
+.drinks-section {
+  max-width: 1300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.drinks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: 3rem;
+}
+
+.drink-card {
+  position: relative;
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(to bottom, rgba(201, 169, 110, 0.03), transparent);
+  border: 1px solid rgba(201, 169, 110, 0.08);
+  border-radius: 2px;
+  transition: all 0.5s ease;
+  cursor: default;
+}
+
+.drink-card:hover {
+  border-color: rgba(201, 169, 110, 0.2);
+  background: linear-gradient(to bottom, rgba(201, 169, 110, 0.06), transparent);
+  transform: translateY(-5px);
+}
+
+.drink-img-wrapper {
+  position: relative;
+  width: 180px;
+  height: 220px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.drink-img-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(201, 169, 110, 0.15), transparent);
+  filter: blur(5px);
+}
+
+.drink-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+  transition: transform 0.5s ease;
+}
+
+.drink-card:hover .drink-img {
+  transform: scale(1.05) translateY(-5px);
+}
+
+.drink-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.drink-desc {
+  font-size: 0.75rem;
+  font-weight: 200;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+.drinks-note {
+  margin-top: 3rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+body.lang-ja .drinks-note {
+  font-family: 'Noto Serif JP', serif;
+  font-style: normal;
+}
+
+/* ========== INFO STRIP ========== */
+.info-strip {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(201, 169, 110, 0.06);
+  border: 1px solid rgba(201, 169, 110, 0.08);
+  border-radius: 2px;
+}
+
+.info-item {
+  padding: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.info-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+}
+
+body.lang-ja .info-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+}
+
+.info-desc {
+  font-size: 0.8rem;
+  font-weight: 200;
+  color: var(--text-dim);
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+}
+
+/* ========== BARTENDER ========== */
+.bartender-section {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.bartender-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 2px;
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.bartender-text .section-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.bartender-text p {
+  font-weight: 200;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin-bottom: 1.2rem;
+}
+
+/* ========== CTA ========== */
+.cta-section {
+  text-align: center;
+  padding: clamp(5rem, 12vw, 10rem) 2rem;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim));
+}
+
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+body.lang-ja .cta-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.4;
+}
+
+.cta-subtitle {
+  font-weight: 200;
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  color: var(--text-dim);
+  margin-bottom: 3rem;
+  letter-spacing: 0.1em;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.1rem 3rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  border-radius: 1px;
+}
+
+.cta-btn:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+.cta-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:hover svg { transform: scale(1.1); }
+
+body.lang-ja .cta-btn {
+  font-family: 'Noto Serif JP', serif;
+  text-transform: none;
+  letter-spacing: 0.15em;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid rgba(201, 169, 110, 0.08);
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--gold-dim);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.8rem;
+}
+
+.footer-sub {
+  font-size: 0.7rem;
+  font-weight: 200;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+  opacity: 0.5;
+}
+
+/* ========== SCROLL ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-images { height: 350px; order: -1; }
+  .drinks-grid { grid-template-columns: repeat(2, 1fr); }
+  .info-strip { grid-template-columns: 1fr; }
+  .bartender-section { grid-template-columns: 1fr; text-align: center; }
+  .bartender-img { max-width: 350px; margin: 0 auto; }
+}
+
+@media (max-width: 550px) {
+  .drinks-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .drink-img-wrapper { width: 130px; height: 170px; }
+  .about-stats { gap: 2rem; }
+  .hero-title { font-size: clamp(2rem, 12vw, 3.5rem); }
+  .lang-buttons { flex-direction: column; gap: 1rem; }
+  .lang-btn { min-width: 220px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Language Selector -->
+<div class="lang-overlay" id="langOverlay">
+  <div class="lang-inner">
+    <div class="lang-top-line"></div>
+    <p class="lang-prompt">Choose your language</p>
+    <div class="lang-buttons">
+      <button class="lang-btn lang-btn-en" onclick="selectLang('en')">
+        <span class="lang-btn-label">ENGLISH</span>
+        <span class="lang-btn-text">Enter</span>
+      </button>
+      <button class="lang-btn lang-btn-jp" onclick="selectLang('ja')">
+        <span class="lang-btn-label">日本語</span>
+        <span class="lang-btn-text">入る</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Language Toggle (persistent, top-right) -->
+<div class="lang-toggle" id="langToggle">
+  <button id="toggleEn" class="active" onclick="switchLang('en')">EN</button>
+  <button id="toggleJa" onclick="switchLang('ja')">JP</button>
+</div>
+
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-text" data-en="SPEAKEASY SUNDAY" data-ja="スピークイージー・サンデー">SPEAKEASY SUNDAY</div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-jp" data-en="日曜日の秘密" data-ja="日曜日の秘密">日曜日の秘密</p>
+    <h1 class="hero-title" data-en="Speakeasy<br>Sunday" data-ja="日曜日だけの<br>隠れ家">
+      Speakeasy<br>Sunday
+      <span data-en="Bristol" data-ja="ブリストル">Bristol</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-details" data-en="SUNDAYS ONLY &nbsp;&bull;&nbsp; 8PM &ndash; 1AM<br>JAPANESE CRAFT COCKTAILS &nbsp;&bull;&nbsp; LIVE DJ<br>COSTA MESA, CA" data-ja="毎週日曜日 &nbsp;&bull;&nbsp; 午後8時〜午前1時<br>日本式カクテル &nbsp;&bull;&nbsp; DJ<br>コスタメサ、カリフォルニア">
+      SUNDAYS ONLY &nbsp;&bull;&nbsp; 8PM &ndash; 1AM<br>
+      JAPANESE CRAFT COCKTAILS &nbsp;&bull;&nbsp; LIVE DJ<br>
+      COSTA MESA, CA
+    </p>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- About -->
+<section>
+  <div class="about">
+    <div class="about-images reveal">
+      <img src="drinks/bar-crowd-2.png" alt="Intimate speakeasy atmosphere" class="about-img-main">
+      <img src="drinks/whisky-candle.jpg" alt="Japanese whisky selection" class="about-img-secondary">
+    </div>
+    <div class="about-text reveal">
+      <p class="section-label" data-en="The Hideout" data-ja="隠れ家について">The Hideout</p>
+      <h2 class="section-title" data-en="A secret worth<br>keeping." data-ja="ここは、あなたの<br>居場所です。">A secret worth<br>keeping.</h2>
+      <p data-en="Behind closed doors in Costa Mesa, <em>Speakeasy Sunday Bristol</em> comes alive once a week. A single bartender. A DJ spinning vinyl. Candlelight and craft cocktails built with the precision of <em>Japanese mixology</em>." data-ja="コスタメサの静かな一角に、週に一度だけ灯りがともる場所があります。バーテンダーはひとり。DJがレコードを回し、キャンドルの灯りの中で、<em>丁寧に仕込んだカクテル</em>をお届けします。">
+        Behind closed doors in Costa Mesa, <em>Speakeasy Sunday Bristol</em> comes alive once a week. A single bartender. A DJ spinning vinyl. Candlelight and craft cocktails built with the precision of <em>Japanese mixology</em>.
+      </p>
+      <p data-en="Each month brings a new menu, a new theme, a new reason to return. From spirit-forward pours to drinks layered with yuzu, matcha, and shiso &mdash; every glass is a quiet revelation." data-ja="メニューは毎月変わります。柚子、抹茶、紫蘇など日本の素材を使ったカクテルから、ウイスキーベースの一杯まで。懐かしさと新しさが同居する味をお楽しみください。日曜の夜、<em>ゆっくりくつろげる場所</em>がここにあります。">
+        Each month brings a new menu, a new theme, a new reason to return. From spirit-forward pours to drinks layered with yuzu, matcha, and shiso &mdash; every glass is a quiet revelation.
+      </p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-value">1</div>
+          <div class="stat-label" data-en="NIGHT PER WEEK" data-ja="週に一夜だけ">NIGHT PER WEEK</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">1</div>
+          <div class="stat-label" data-en="BARTENDER" data-ja="バーテンダー">BARTENDER</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">&infin;</div>
+          <div class="stat-label" data-en="ATTENTION TO DETAIL" data-ja="こだわり">ATTENTION TO DETAIL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Atmosphere Parallax -->
+<div class="atmosphere">
+  <div class="atmosphere-bg"></div>
+  <div class="atmosphere-overlay"></div>
+  <div class="atmosphere-content">
+    <p class="atmosphere-quote reveal" data-en="Dim lights. <span>Slow sips.</span><br>Cocktails made for lingering conversations." data-ja="薄暗い照明。<span>静かな一杯。</span><br>急がなくていい。ここでは、あなたのペースで。">
+      Dim lights. <span>Slow sips.</span><br>Cocktails made for lingering conversations.
+    </p>
+  </div>
+</div>
+
+<!-- Featured Drinks -->
+<section>
+  <div class="drinks-section">
+    <p class="section-label reveal" data-en="The Craft" data-ja="こだわりの一杯">The Craft</p>
+    <h2 class="section-title reveal" data-en="A taste of what<br>we've poured." data-ja="これまでの<br>カクテルから。">A taste of what<br>we've poured.</h2>
+    <div class="drinks-grid">
+      <div class="drink-card reveal">
+        <div class="drink-img-wrapper">
+          <img src="drinks/ambre-nuit.png" alt="Ambre Nuit cocktail" class="drink-img">
+        </div>
+        <h3 class="drink-name">Ambre Nuit</h3>
+        <p class="drink-desc" data-en="Rose &bull; Orange Peel &bull; Warmth" data-ja="薔薇 &bull; オレンジピール &bull; 温もり">Rose &bull; Orange Peel &bull; Warmth</p>
+      </div>
+      <div class="drink-card reveal">
+        <div class="drink-img-wrapper">
+          <img src="drinks/jazz-club.png" alt="Jazz Club cocktail" class="drink-img">
+        </div>
+        <h3 class="drink-name">Jazz Club</h3>
+        <p class="drink-desc" data-en="Smoke &bull; Bourbon &bull; Chocolate" data-ja="燻し &bull; バーボン &bull; チョコレート">Smoke &bull; Bourbon &bull; Chocolate</p>
+      </div>
+      <div class="drink-card reveal">
+        <div class="drink-img-wrapper">
+          <img src="drinks/no5.png" alt="No. 5 cocktail" class="drink-img">
+        </div>
+        <h3 class="drink-name">No. 5</h3>
+        <p class="drink-desc" data-en="Champagne &bull; Citrus &bull; Elegance" data-ja="シャンパン &bull; 柑橘 &bull; 華やかさ">Champagne &bull; Citrus &bull; Elegance</p>
+      </div>
+      <div class="drink-card reveal">
+        <div class="drink-img-wrapper">
+          <img src="drinks/halfeti.png" alt="Halfeti cocktail" class="drink-img">
+        </div>
+        <h3 class="drink-name">Halfeti</h3>
+        <p class="drink-desc" data-en="Rosemary &bull; Cardamom &bull; Depth" data-ja="ローズマリー &bull; カルダモン &bull; 奥行き">Rosemary &bull; Cardamom &bull; Depth</p>
+      </div>
+    </div>
+    <p class="drinks-note reveal" data-en="New menu every month. Come discover what's next." data-ja="メニューは毎月入れ替わります。次の一杯を、見つけに来てください。">New menu every month. Come discover what's next.</p>
+  </div>
+</section>
+
+<!-- Info Strip -->
+<section>
+  <div class="info-strip reveal">
+    <div class="info-item">
+      <div class="info-icon">&#127912;</div>
+      <h3 class="info-title" data-en="Live DJ" data-ja="DJ選曲">Live DJ</h3>
+      <p class="info-desc" data-en="Chill jazz, vinyl moods, and<br>curated sets to match the pour." data-ja="ジャズやレコードの音色で<br>ゆったりとした空間を演出します。">Chill jazz, vinyl moods, and<br>curated sets to match the pour.</p>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">&#127864;</div>
+      <h3 class="info-title" data-en="Japanese Mixology" data-ja="日本式カクテル">Japanese Mixology</h3>
+      <p class="info-desc" data-en="Traditional hard shake technique.<br>Yuzu. Matcha. Shiso. Dashi." data-ja="ハードシェイクの技法。<br>柚子、抹茶、紫蘇、出汁。">Traditional hard shake technique.<br>Yuzu. Matcha. Shiso. Dashi.</p>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">&#128274;</div>
+      <h3 class="info-title" data-en="Secret Location" data-ja="完全紹介制">Secret Location</h3>
+      <p class="info-desc" data-en="DM us on Instagram<br>for the address & reservations." data-ja="InstagramのDMにて<br>場所と予約をご案内します。">DM us on Instagram<br>for the address & reservations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Bartender -->
+<section>
+  <div class="bartender-section">
+    <img src="drinks/bartender.jpg" alt="The bartender at work" class="bartender-img reveal">
+    <div class="bartender-text reveal">
+      <p class="section-label" data-en="The Bartender" data-ja="バーテンダー">The Bartender</p>
+      <h2 class="section-title" data-en="One bartender.<br>Every detail." data-ja="一人のバーテンダー。<br>すべてに、手を抜かない。">One bartender.<br>Every detail.</h2>
+      <p data-en="There's no menu board. There's no rush. Just one person behind the bar, building each drink with the precision and care of a craft that takes years to master." data-ja="カウンターの中にいるのは、一人だけ。急ぐ必要はありません。長年磨いてきた技術と感覚で、一杯一杯を丁寧に仕上げます。">
+        There's no menu board. There's no rush. Just one person behind the bar, building each drink with the precision and care of a craft that takes years to master.
+      </p>
+      <p data-en="Tell him what you like. Watch the Japanese hard shake. Taste something you've never had before. That's the whole point." data-ja="好みを伝えてください。ハードシェイクを眺めながら、まだ出会ったことのない味を楽しんでください。それが、ここの過ごし方です。">
+        Tell him what you like. Watch the Japanese hard shake. Taste something you've never had before. That's the whole point.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="reveal">
+    <p class="section-label" data-en="Find Us" data-ja="ご案内">Find Us</p>
+    <h2 class="cta-title" data-en="Ready to<br>disappear?" data-ja="日曜の夜、<br>ふらっと寄りませんか。">Ready to<br>disappear?</h2>
+    <p class="cta-subtitle" data-en="We don't post the address. Sundays only, 8PM&ndash;1AM. Last entry at 12:30AM. DM us for the location and to reserve your seat." data-ja="住所は公開していません。毎週日曜、午後8時から午前1時まで。最終入店は12時半。Instagramからお気軽にご連絡ください。">
+      We don't post the address. Sundays only, 8PM&ndash;1AM. Last entry at 12:30AM. DM us for the location and to reserve your seat.
+    </p>
+    <a href="https://www.instagram.com/speakeasy.sunday.bristol/" target="_blank" rel="noopener" class="cta-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+      <span data-en="DM for Location" data-ja="DMで場所を聞く">DM for Location</span>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">SPEAKEASY SUNDAY BRISTOL</div>
+  <p class="footer-sub" data-en="COSTA MESA, CA &nbsp;&bull;&nbsp; SUNDAYS 8PM&ndash;1AM" data-ja="コスタメサ、CA &nbsp;&bull;&nbsp; 毎週日曜 午後8時〜午前1時">COSTA MESA, CA &nbsp;&bull;&nbsp; SUNDAYS 8PM&ndash;1AM</p>
+</footer>
+
+<script>
+let currentLang = 'en';
+
+function selectLang(lang) {
+  currentLang = lang;
+  const overlay = document.getElementById('langOverlay');
+  overlay.classList.add('hidden');
+
+  // Show preloader then hide
+  setTimeout(() => {
+    applyLang(lang);
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hidden');
+      document.getElementById('langToggle').classList.add('visible');
+    }, 1200);
+  }, 400);
+}
+
+function switchLang(lang) {
+  currentLang = lang;
+  applyLang(lang);
+  // Update toggle buttons
+  document.getElementById('toggleEn').classList.toggle('active', lang === 'en');
+  document.getElementById('toggleJa').classList.toggle('active', lang === 'ja');
+}
+
+function applyLang(lang) {
+  // Set body class
+  document.body.classList.toggle('lang-ja', lang === 'ja');
+  document.documentElement.lang = lang;
+
+  // Swap all text content
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    if (text !== null) {
+      el.innerHTML = text;
+    }
+  });
+
+  // Re-append the <span> inside hero-title if needed
+  const heroTitle = document.querySelector('.hero-title');
+  const heroSpan = heroTitle.querySelector('span');
+  if (!heroSpan) {
+    const span = document.createElement('span');
+    span.setAttribute('data-en', 'Bristol');
+    span.setAttribute('data-ja', 'ブリストル');
+    span.textContent = lang === 'ja' ? 'ブリストル' : 'Bristol';
+    heroTitle.appendChild(span);
+  }
+}
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Subtle parallax on hero
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const hero = document.querySelector('.hero-bg');
+  if (hero && scrolled < window.innerHeight) {
+    hero.style.transform = `scale(${1.05 + scrolled * 0.0001}) translateY(${scrolled * 0.3}px)`;
+  }
+});
+</script>
+
+</body>
+</html>
